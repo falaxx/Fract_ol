@@ -18,15 +18,22 @@ void		ft_init_image(t_f *lst)
 
 void ft_init_list(t_f *lst)
 {
+	if (lst->mode == 1)
+	{
+		lst->x1 = -2.1;
+		lst->x2 = 0.6;
+		lst->y1 = -1.2;
+		lst->y2 = 1.2;
+	}
+	if (lst->mode == 2)
+	{
+		lst->x1 = -1;
+		lst->x2 = 1;
+		lst->y1 = -1.2;
+		lst->y2 = 1.2;
+	}
+	lst->moove = 1;
 	lst->iteration = 50;
-	lst->x1 = -2.1;
-	lst->x2 = 0.6;
-	lst->y1 = -1.2;
-	lst->y2 = 1.2;
-	// lst->x1 = -1;
-	// lst->x2 = 1;
-	// lst->y1 = -1.2;
-	// lst->y2 = 1.2;
 	lst->x = 0;
 	lst->y = 0;
 	lst->z_i = 0;
@@ -36,5 +43,15 @@ void ft_init_list(t_f *lst)
 	lst->mlx_ptr = mlx_init();
 	lst->win_ptr = mlx_new_window(lst->mlx_ptr, WIN_SIZEX, WIN_SIZEY, "Fractol");
 	ft_init_image(lst);
+}
 
+void	ft_mode(t_f *lst, char **av)
+{
+	if (av[1][0] == '1')
+		lst->mode = 1;
+	if (av[1][0] == '2')
+		lst->mode = 2;
+	// if (av[1][0] == '2')
+	// 	lst->mode = 2;
+	ft_init_list(lst);
 }

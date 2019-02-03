@@ -8,14 +8,21 @@ int		key_hook(int key, void *param)
 	lst = (t_f *)param;
 	if (key == 53)
 		exit(0);
-	if (key == 78)
+	if (key == 67)
+	{
+	if (lst->moove == 1)
+		lst->moove = 0;
+	else
+		lst->moove = 1;
+	}
+	if (key == 69)
 	{
 		if (lst->iteration >= 10)
 			lst->iteration += 10;
 		else if(lst->iteration < 10)
 			lst->iteration++;
 	}
-	if (key == 69)
+	if (key == 78)
 	{
 		if (lst->iteration > 10)
 			lst->iteration -= 10;
@@ -23,14 +30,25 @@ int		key_hook(int key, void *param)
 			lst->iteration--;
 	}
 	if (key == 124)
-		lst->z_i -= 0.01;
+	{
+		lst->x1 -= 0.02;
+		lst->x2 -= 0.02;
+	}
 	if (key == 123)
-		lst->z_i += 0.01;
+	{
+		lst->x1 += 0.02;
+		lst->x2 += 0.02;
+	}
 	if (key == 126)
-		lst->z_r -= 0.01;
+	{
+		lst->y1 += 0.02;
+		lst->y2 += 0.02;
+	}
 	if (key == 125)
-		lst->z_r += 0.01;
-
+	{
+		lst->y1 -= 0.02;
+		lst->y2 -= 0.02;
+	}
 	mlx_destroy_image(lst->mlx_ptr, lst->img);
 	ft_init_image(lst);
 	ft_trace(lst);
@@ -45,13 +63,13 @@ int		mouse_hook(int key, int i, int j, void *param)
 	i = j;
 	if (key == 5)
 	{
-		lst->zoom_x+= 10;
-		lst->zoom_y+= 10;
+		lst->zoom_x+= 30;
+		lst->zoom_y+= 30;
 	}
 	if (key == 4 )
 	{
-		lst->zoom_x-= 10;
-		lst->zoom_y-= 10;
+		lst->zoom_x-= 30;
+		lst->zoom_y-= 30;
 	}
 	// ft_putnbr(lst->zoom_x);
 	// ft_putchar('\n');
@@ -66,24 +84,25 @@ int mouse_move (int i, int j, void *param)
 	t_f *lst;
 
 	lst = (t_f *)param;
-if (i < lst->savei)
-	lst->z_i -= 0.01;
-if (j < lst->savej)
-	lst->z_r -= 0.01;
-if (i > lst->savei)
-	lst->z_i += 0.01;
-if (j > lst->savej)
-	lst->z_r += 0.01;
-//
-//
-mlx_destroy_image(lst->mlx_ptr, lst->img);
-ft_init_image(lst);
-ft_trace(lst);
-lst->savei = i;
-lst->savej = j;
-//
-return(0);
+	if (lst->moove == 1)
+	{
+		if (i < lst->savei)
+			lst->z_i -= 0.02;
+		if (j < lst->savej)
+			lst->z_r += 0.02;
+		if (i > lst->savei)
+			lst->z_i += 0.02;
+		if (j > lst->savej)
+			lst->z_r -= 0.02;
+		mlx_destroy_image(lst->mlx_ptr, lst->img);
+		ft_init_image(lst);
+		ft_trace(lst);
+		lst->savei = i;
+		lst->savej = j;
+	}
+	return(0);
 }
+
 int		ft_expose(void *param)
 {
 	t_f *lst;
