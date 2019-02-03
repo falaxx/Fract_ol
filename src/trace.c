@@ -1,44 +1,87 @@
 
 #include "fractol.h"
 
-void ft_trace(t_f *lst)
+void	ft_trace(t_f *lst)
 {
-	float c_r;
-	float c_i;
-	float z_r;
-	float z_i;
-	float tmp;
-	int i;
+	float	c_r;
+	float	c_i;
+	float	z_r;
+	float	z_i;
+	float	tmp;
+	int		i;
 
 	if (lst->mode == 2)
 	{
 		ft_trace2(lst);
 		return ;
 	}
-	// if (lst->mode == 3)
-	// 	ft_trace3(lst);
+	if (lst->mode == 3)
+	{
+		ft_trace3(lst);
+		return ;
+	}
+	lst->x = 0;
+	lst->y = 0;
+	while (lst->x < WIN_SIZEX)
+	{
+		while (lst->y < WIN_SIZEY)
+		{
+			c_r = lst->x / lst->zoom_x + lst->x1;
+			c_i = lst->y / lst->zoom_y + lst->y1;
+			z_r = lst->z_r;
+			z_i = lst->z_i;
+			i = 0;
+			while ((z_r * z_r + z_i * z_i) < 4 && i < lst->iteration)
+			{
+				tmp = z_r;
+				z_r = (z_r * z_r - z_i * z_i + c_r);
+				z_i = (2 * z_i * tmp + c_i);
+				i++;
+			}
+			if (i == lst->iteration)
+				ft_lightup_pixel(lst, lst->x, lst->y, 0);
+			else
+				ft_lightup_pixel(lst, lst->x, lst->y, i);
+			lst->y++;
+		}
+		lst->y = 0;
+		lst->x++;
+	}
+	mlx_put_image_to_window(lst->mlx_ptr, lst->win_ptr, lst->img, 0,
+	0);
+}
+
+void	ft_trace2(t_f *lst)
+{
+	float	c_r;
+	float	c_i;
+	float	z_r;
+	float	z_i;
+	float	tmp;
+	int		i;
+
 	lst->x = 0;
 	lst->y = 0;
 	while (lst->x < WIN_SIZEX)
 	{
 		while(lst->y < WIN_SIZEY)
 		{
-			c_r = lst->x/lst->zoom_x + lst->x1;
-			c_i = lst->y/lst->zoom_y + lst->y1;
-			z_r = lst->z_r;
-			z_i = lst->z_i;
+			c_r = lst->z_r;
+			c_i = lst->z_i;
+			z_r = lst->x / lst->zoom_x + lst->x1;
+			z_i = lst->y / lst->zoom_y + lst->y1;
 			i = 0;
-			while((z_r * z_r + z_i * z_i) < 4 && i < lst->iteration)
+			while ((z_r * z_r + z_i * z_i) < 4 && i < lst->iteration)
 			{
 				tmp = z_r;
-				z_r = (z_r * z_r - z_i*z_i + c_r);
+				z_r = (z_r * z_r - z_i * z_i + c_r);
 				z_i = (2 * z_i * tmp + c_i);
 				i++;
 			}
 			if (i == lst->iteration)
-				ft_lightup_pixel (lst, lst->x, lst->y, 0);
+				ft_lightup_pixel(lst, lst->x, lst->y, 1);
 			else
-				ft_lightup_pixel (lst, lst->x, lst->y, i);
+				ft_lightup_pixel(lst, lst->x, lst->y, i);
 			lst->y++;
 		}
 		lst->y = 0;
@@ -47,41 +90,47 @@ void ft_trace(t_f *lst)
 	mlx_put_image_to_window(lst->mlx_ptr, lst->win_ptr, lst->img, 0, 0);
 }
 
-void ft_trace2(t_f *lst)
+void ft_trace3(t_f *lst)
 {
-	float c_r;
-	float c_i;
-	float z_r;
-	float z_i;
-	float tmp;
-	int i;
+	float	c_r;
+	float	c_i;
+	float	z_r;
+	float	z_i;
+	float	tmp;
+	int		i;
 
 	lst->x = 0;
 	lst->y = 0;
-	while (lst->x < WIN_SIZEX)
+	while (lst->iteration != 150)
+	{
+		while (lst->x < WIN_SIZEX)
 	{
 		while(lst->y < WIN_SIZEY)
 		{
-			c_r = lst->z_r ; // inverser pour mandel
-			c_i = lst->z_i ;
-			z_r = lst->x/lst->zoom_x + lst->x1;
-			z_i = lst->y/lst->zoom_y + lst->y1;
+			c_r = lst->x/lst->zoom_x + lst->x1;
+			c_i = lst->y/lst->zoom_y + lst->y1;
+			z_r = lst->z_r;
+			z_i = lst->z_i;
 			i = 0;
-			while((z_r * z_r + z_i * z_i) < 4 && i < lst->iteration)
+			while((z_r * z_r + z_i * z_i ) > 4 || i < lst->iteration)
 			{
 				tmp = z_r;
 				z_r = (z_r * z_r - z_i*z_i + c_r);
 				z_i = (2 * z_i * tmp + c_i);
+				ft_lightup_pixel (lst, lst->x, lst->y, i);
 				i++;
 			}
 			if (i == lst->iteration)
 				ft_lightup_pixel (lst, lst->x, lst->y, 0);
-			else
-				ft_lightup_pixel (lst, lst->x, lst->y, i);
+			// else
+			// 	ft_lightup_pixel (lst, lst->x, lst->y, i);
 			lst->y++;
 		}
 		lst->y = 0;
 		lst->x++;
 	}
+	lst->x = 0;
+	lst->iteration +=10;
 	mlx_put_image_to_window(lst->mlx_ptr, lst->win_ptr, lst->img, 0, 0);
+	}
 }
