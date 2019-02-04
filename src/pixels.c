@@ -1,6 +1,42 @@
 
 #include "fractol.h"
 
+void	ft_menu(t_f *lst)
+{
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 0, 0xFFFFFF,
+		"COMMANDS");
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 20, 0xFFFFFF,
+		"Arrows | Movements");
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 35, 0xFFFFFF,
+		"  + -  | Iterations");
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 50, 0xFFFFFF,
+		"Scroll | Zoom");
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 65, 0xFFFFFF,
+		" 1 2 3 | Colors");
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 80, 0xFFFFFF,
+		"Delete | Reset");
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 95, 0xFFFFFF,
+		"Escape | Close");
+	// mlx_string_put(lst->mlx_ptr, lst->win_ptr, 60, 335, 0xFFFF90,
+	// 	"Echap = Fermer");
+	// mlx_string_put(lst->mlx_ptr, lst->win_ptr, 60, 370, 0xFFFF90,
+	// 	"Enter = Afficher/Cacher les commandes");
+	// mlx_string_put(lst->mlx_ptr, lst->win_ptr, 60, 405, 0xFFFF90,
+	// 	"Touches num [1-8] = Choix des couleurs");
+}
+
+// void 	ft_lightup_menu(t_f *lst)
+// {
+// 	int x;
+// 	x = -1;
+// 	while( x < WIN_SIZEX/4*4*WIN_SIZEY/5)
+// {	lst->s_img[x++] = 0;
+// 	lst->s_img[x++] = 0;
+// 	lst->s_img[x++] = 0;
+// 	lst->s_img[x++] = 0;}
+// }
+
+
 void	ft_lightup_pixel(t_f *lst, int x, int y, int i)
 {
 	int new_x;
@@ -10,32 +46,57 @@ void	ft_lightup_pixel(t_f *lst, int x, int y, int i)
 	if (x < WIN_SIZEX && y < WIN_SIZEY && x > 0 && y > 0)
 	{
 		new_x = x * 4 + ((WIN_SIZEX * 4) * y);
-		// if (i <= 10)
-			x1 = i*255*0.0001*lst->iteration;
-		// if ((i > 10 && i <= 20) || (i > 100 && i <= 200))
- 		// 	x1= i*255*0.01*lst->iteration;
-		// if ((i > 20 && i <= 30) || (i > 200 && i <= 300))
-		// 	x1=i*255*0.1*lst->iteration;
-		// if ((i > 30 && i <= 40) || (i > 300 && i <= 400))
-		// 	x1 = i*255*0.001*lst->iteration;
-		// if ((i > 40 && i <= 50) || (i > 400 && i <= 500))
-		// 	x1= i*255*0.01*lst->iteration;
-		// if ((i > 50 && i <= 60) || (i > 500 && i <= 600))
-		// 	x1= i*255*0.1*lst->iteration;
-		// if ((i > 60 && i <= 70) || (i > 600 && i <= 700))
-		// 	x1 = i*255*0.001*lst->iteration;
-		// if ((i > 70 && i <= 80) || (i > 700 && i <= 800))
-		// 	x1= i*255*0.01*lst->iteration;
-		// if ((i > 80 && i <= 90) || (i > 800 && i <= 900))
-		// 	x1= i*255*0.1*lst->iteration;
-		// if ((i > 90 && i <= 100)|| (i > 900 && i <= 1000))
-		// 	x1 = i*255*0.0001*lst->iteration;
+		if (lst->colormode == 1)
+		{
+			x1 = sin(0.4*i - 11)*127+128;
+			x2 = sin(0.1*i + 33)*127+128;
+			x3 = sin(0.22*i + 12)*127+128;
+		}
+		if (lst->colormode == 2)
+		{
+			x1 = sin(0.1*i + 12)*127+128;
+			x2 = sin(0.01*i + 99)*127+128;
+			x3 = sin(0.44*i + 4)*127+128;
+		}
+		if (lst->colormode == 3)
+		{
+			x1 = sin(0.1*i + 0)*127+128;
+			x2 = sin(0.9*i + 48)*127+128;
+			x3 = sin(0.7*i - 22)*127+128;
+		}
+		if (lst->colormode == 4)
+		{
+			x1 = sin(0.3*i + 0)*127+128;
+			x2 = sin(0.3*i + 2)*127+128;
+			x3 = sin(0.3*i + 4)*127+128;
+		}
+		if (lst->colormode == 5)
+		{
+			x1 = sin(0.3*i + 12)*127+128;
+			x2 = sin(0.2*i + 5)*127+128;
+			x3 = sin(0.3*i + 10)*127+128;
+		}
+		if (lst->colormode == 6)
+		{
+			x1 = sin(0.5*i + 0)*127+128;
+			x2 = sin(0.01*i + 51)*127+128;
+			x3 = sin(0.8*i -44)*127+128;
+		}
+		if (lst->colormode == 7)
+		{
+			x1 = sin(0.001*i + 1)*127+128;
+			x2 = sin(0.3*i + 9)*127+128;
+			x3 = sin(0.044*i + 8)*127+128;
+		}
 		lst->s_img[new_x] = x1;
 		lst->s_img[new_x + 1] = x2;
 		lst->s_img[new_x + 2] = x3;
-		lst->s_img[new_x + 3] = 1;
+		lst->s_img[new_x + 3] = 0;
 	}
+
 }
+
+
 
 
 float		ft_random7(void)

@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 15:37:42 by fmerding          #+#    #+#             */
-/*   Updated: 2019/02/03 18:37:17 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/02/04 18:28:44 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ typedef struct		s_f
 	int				savej;
 	int				iteration;
 	int				mode;
+	int				colormode;
 	int				moove;
+	int				dejavu;
 	double			z_i;
 	double			z_r;
 	double			x1;
@@ -48,6 +50,7 @@ typedef struct		s_f
 
 }					t_f;
 
+void	ft_menu(t_f *lst);
 void	ft_zoom(int x, int y, t_f *lst, int z);
 void	ft_mode(t_f *lst, char **av);
 int 	mouse_move (int x, int y, void *param);
@@ -56,10 +59,17 @@ void	ft_init_image(t_f *lst);
 int		key_hook(int key, void *param);
 int		mouse_hook(int key, int i, int j, void *param);
 int		ft_expose(void *param);
+// void	ft_init_image_menu(t_f *lst);
 void	ft_lightup_pixel(t_f *lst, int x, int y, int i);
+// void 	ft_lightup_menu(t_f *lst);
 void	ft_trace(t_f *lst);
 void	ft_trace2(t_f *lst);
 void	ft_trace3(t_f *lst);
+void	ft_trace4(t_f *lst);
+void	ft_trace5(t_f *lst);
+void	ft_trace6(t_f *lst);
+void	ft_trace7(t_f *lst);
+void	ft_trace8(t_f *lst);
 void	ft_init_list(t_f *lst);
 void	ft_re_init_list(t_f *lst);
 

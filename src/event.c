@@ -8,6 +8,20 @@ int		key_hook(int key, void *param)
 	lst = (t_f *)param;
 	if (key == 53)
 		exit(0);
+	if (key == 18)
+		lst->colormode = 1;
+	if (key == 19)
+		lst->colormode = 2;
+	if (key == 20)
+		lst->colormode = 3;
+	if (key == 21)
+		lst->colormode = 4;
+	if (key == 22)
+		lst->colormode = 5;
+	if (key == 23)
+		lst->colormode = 6;
+	if (key == 26)
+		lst->colormode = 7;	
 	if (key == 67)
 	{
 		if (lst->moove == 1)
@@ -50,9 +64,23 @@ int		key_hook(int key, void *param)
 		lst->y2 -= 30 / lst->zoom_y;
 	}
 	if (key == 51)
-		ft_re_init_list(lst);
-	ft_putnbr(lst->iteration);
-	ft_putchar('\n');
+		ft_init_list(lst);
+	if (key == 47)
+	{
+		lst->mode++;
+		if (lst->mode == 9)
+			lst->mode = 1;
+		ft_init_list(lst);
+	}
+	if (key == 43)
+	{
+		lst->mode--;
+		if (lst->mode == 0)
+			lst->mode = 8;
+		ft_init_list(lst);
+	}
+
+
 	mlx_destroy_image(lst->mlx_ptr, lst->img);
 	ft_init_image(lst);
 	ft_trace(lst);
@@ -77,11 +105,12 @@ int		mouse_hook(int key, int x, int y, void *param)
 	// ft_putchar('\n');
 	mlx_destroy_image(lst->mlx_ptr, lst->img);
 	ft_init_image(lst);
+	lst->dejavu = 1;
 	ft_trace(lst);
 	return (0);
 }
 
-int mouse_move(int x, int y, void *param)
+int		mouse_move(int x, int y, void *param)
 {
 	t_f *lst;
 
@@ -106,6 +135,26 @@ int mouse_move(int x, int y, void *param)
 		lst->savei = x;
 		lst->savej = y;
 	}
+
+		ft_putstr("lst->x1 ");
+		ft_putnbr(lst->x1*100);
+
+		ft_putchar('\n');
+			ft_putstr("lst->x2 ");
+		ft_putnbr(lst->x2*100);
+		ft_putchar('\n');ft_putstr("lst->y1 ");
+		ft_putnbr(lst->y1*100);
+		ft_putchar('\n');
+		ft_putstr("lst->y2 ");
+		ft_putnbr(lst->y2*100);
+
+		ft_putchar('\n');
+		ft_putstr("lst->zi ");
+		ft_putnbr(lst->z_i*100);
+		ft_putchar('\n');
+			ft_putstr("lst->zr ");
+		ft_putnbr(lst->z_r*100);
+		ft_putchar('\n');
 	return (0);
 }
 
