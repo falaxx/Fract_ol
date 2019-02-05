@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 15:37:42 by fmerding          #+#    #+#             */
-/*   Updated: 2019/02/04 18:28:44 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/02/05 18:16:01 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <string.h>
 # include <math.h>
 # include <stdio.h>//attention
+# include <pthread.h>
 # define WIN_SIZEX 800
 # define WIN_SIZEY 600
 
@@ -32,7 +33,6 @@ typedef struct		s_f
 	int				mode;
 	int				colormode;
 	int				moove;
-	int				dejavu;
 	double			z_i;
 	double			z_r;
 	double			x1;
@@ -47,8 +47,23 @@ typedef struct		s_f
 	void			*win_ptr;
 	void			*img;
 	unsigned char	*s_img;
+	int				xzoom;
+	int				yzoom;
 
 }					t_f;
+
+typedef struct		s_th
+{
+	double		c_r;
+	double		c_i;
+	double		z_r;
+	double		z_i;
+	double		tmp;
+	int			i;
+	int 		x;
+	int 		y;
+}				t_th;
+
 
 void	ft_menu(t_f *lst);
 void	ft_zoom(int x, int y, t_f *lst, int z);
@@ -71,6 +86,11 @@ void	ft_trace6(t_f *lst);
 void	ft_trace7(t_f *lst);
 void	ft_trace8(t_f *lst);
 void	ft_init_list(t_f *lst);
+void	ft_init_list2(t_f *lst);
+void	ft_init_list3(t_f *lst);
 void	ft_re_init_list(t_f *lst);
+void	*ft_thread_2(void *arg);
+void	*ft_thread_1(void *arg);
+
 
 #endif

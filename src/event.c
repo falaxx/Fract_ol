@@ -21,7 +21,7 @@ int		key_hook(int key, void *param)
 	if (key == 23)
 		lst->colormode = 6;
 	if (key == 26)
-		lst->colormode = 7;	
+		lst->colormode = 7;
 	if (key == 67)
 	{
 		if (lst->moove == 1)
@@ -80,7 +80,6 @@ int		key_hook(int key, void *param)
 		ft_init_list(lst);
 	}
 
-
 	mlx_destroy_image(lst->mlx_ptr, lst->img);
 	ft_init_image(lst);
 	ft_trace(lst);
@@ -101,11 +100,8 @@ int		mouse_hook(int key, int x, int y, void *param)
 		z = 0;
 		ft_zoom(x, y, lst, z);
 	}
-	// ft_putnbr(lst->zoom_x);
-	// ft_putchar('\n');
 	mlx_destroy_image(lst->mlx_ptr, lst->img);
 	ft_init_image(lst);
-	lst->dejavu = 1;
 	ft_trace(lst);
 	return (0);
 }
@@ -125,53 +121,28 @@ int		mouse_move(int x, int y, void *param)
 			lst->z_i += 0.02;
 		if (y > lst->savej)
 			lst->z_r -= 0.02;
-		ft_putstr("zi");
-		ft_putnbr(lst->z_i * 100);
-		ft_putstr("zr");
-		ft_putnbr(lst->z_i * 100);
 		mlx_destroy_image(lst->mlx_ptr, lst->img);
 		ft_init_image(lst);
 		ft_trace(lst);
 		lst->savei = x;
 		lst->savej = y;
 	}
-
-		ft_putstr("lst->x1 ");
-		ft_putnbr(lst->x1*100);
-
-		ft_putchar('\n');
-			ft_putstr("lst->x2 ");
-		ft_putnbr(lst->x2*100);
-		ft_putchar('\n');ft_putstr("lst->y1 ");
-		ft_putnbr(lst->y1*100);
-		ft_putchar('\n');
-		ft_putstr("lst->y2 ");
-		ft_putnbr(lst->y2*100);
-
-		ft_putchar('\n');
-		ft_putstr("lst->zi ");
-		ft_putnbr(lst->z_i*100);
-		ft_putchar('\n');
-			ft_putstr("lst->zr ");
-		ft_putnbr(lst->z_r*100);
-		ft_putchar('\n');
 	return (0);
 }
 
 void	ft_zoom(int x, int y, t_f *lst, int z)
 {
+	// float xdiff = lst->x2-lst->x1;
+	// float ydiff = lst->y2-lst->y1;
+
 	if (z == 1)
 	{
 		lst->zoom_x *= 1.1;
 		lst->zoom_y *= 1.1;
-		lst->x1 = (lst->x1 * lst->zoom_x + x - 0.5 * WIN_SIZEX) /
-		lst->zoom_x;
-		lst->x2 = (lst->x2 * lst->zoom_x + x + 0.5 * WIN_SIZEX) /
-		lst->zoom_x;
-		lst->y1 = (lst->y1 * lst->zoom_y + y - 0.5 * WIN_SIZEY) /
-		lst->zoom_y;
-		lst->y2 = (lst->y2 * lst->zoom_y + y + 0.5 * WIN_SIZEY) /
-		lst->zoom_y;
+		lst->x1 = lst->x1 * lst->zoom_x ;
+		lst->x2 = lst->x2 * lst->zoom_x;
+		lst->y1 = lst->y1 * lst->zoom_y;
+		lst->y2 = lst->y2 * lst->zoom_y;
 	}
 	if (z == 0)
 	{

@@ -2,7 +2,7 @@ NAME = fractol
 
 SRC_PATH = src
 
-SRC_NAME = trace.c init.c main.c pixels.c event.c
+SRC_NAME = trace.c init.c main.c pixels.c event.c trace2.c
 
 CPPFLAGS = -I libft/includes/ -I /usr/local/include/ -MMD
 

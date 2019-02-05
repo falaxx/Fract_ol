@@ -17,24 +17,9 @@ void	ft_menu(t_f *lst)
 		"Delete | Reset");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 95, 0xFFFFFF,
 		"Escape | Close");
-	// mlx_string_put(lst->mlx_ptr, lst->win_ptr, 60, 335, 0xFFFF90,
-	// 	"Echap = Fermer");
-	// mlx_string_put(lst->mlx_ptr, lst->win_ptr, 60, 370, 0xFFFF90,
-	// 	"Enter = Afficher/Cacher les commandes");
-	// mlx_string_put(lst->mlx_ptr, lst->win_ptr, 60, 405, 0xFFFF90,
-	// 	"Touches num [1-8] = Choix des couleurs");
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 110, 0xFFFFFF,
+		"   *   | block/unblock");
 }
-
-// void 	ft_lightup_menu(t_f *lst)
-// {
-// 	int x;
-// 	x = -1;
-// 	while( x < WIN_SIZEX/4*4*WIN_SIZEY/5)
-// {	lst->s_img[x++] = 0;
-// 	lst->s_img[x++] = 0;
-// 	lst->s_img[x++] = 0;
-// 	lst->s_img[x++] = 0;}
-// }
 
 
 void	ft_lightup_pixel(t_f *lst, int x, int y, int i)
