@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 15:37:42 by fmerding          #+#    #+#             */
-/*   Updated: 2019/02/05 18:16:01 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/02/06 18:29:06 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <math.h>
 # include <stdio.h>//attention
 # include <pthread.h>
-# define WIN_SIZEX 800
-# define WIN_SIZEY 600
+# define WIN_SIZEX 1200
+# define WIN_SIZEY 800
 
 
 typedef struct		s_f
@@ -49,7 +49,7 @@ typedef struct		s_f
 	unsigned char	*s_img;
 	int				xzoom;
 	int				yzoom;
-
+	int				retarded;
 }					t_f;
 
 typedef struct		s_th
@@ -64,33 +64,39 @@ typedef struct		s_th
 	int 		y;
 }				t_th;
 
-
+int		ft_red(t_f *lst, int i);
+int		ft_blue(t_f *lst, int i);
+int		ft_green(t_f *lst, int i);
 void	ft_menu(t_f *lst);
 void	ft_zoom(int x, int y, t_f *lst, int z);
-void	ft_mode(t_f *lst, char **av);
 int 	mouse_move (int x, int y, void *param);
 float	ft_random7(void);
 void	ft_init_image(t_f *lst);
 int		key_hook(int key, void *param);
+void	key_hook2(t_f *lst, int key);
+void	key_hook3(t_f *lst, int key);
+void	key_hook4(t_f *lst, int key);
 int		mouse_hook(int key, int i, int j, void *param);
 int		ft_expose(void *param);
-// void	ft_init_image_menu(t_f *lst);
 void	ft_lightup_pixel(t_f *lst, int x, int y, int i);
-// void 	ft_lightup_menu(t_f *lst);
 void	ft_trace(t_f *lst);
-void	ft_trace2(t_f *lst);
-void	ft_trace3(t_f *lst);
-void	ft_trace4(t_f *lst);
-void	ft_trace5(t_f *lst);
-void	ft_trace6(t_f *lst);
-void	ft_trace7(t_f *lst);
-void	ft_trace8(t_f *lst);
+void	ft_init_list0(t_f *lst);
 void	ft_init_list(t_f *lst);
 void	ft_init_list2(t_f *lst);
 void	ft_init_list3(t_f *lst);
 void	ft_re_init_list(t_f *lst);
 void	*ft_thread_2(void *arg);
 void	*ft_thread_1(void *arg);
-
+void	*ft_thread_3(void *arg);
+void	*ft_thread_4(void *arg);
+int		ft_mode(t_f *lst, t_th *tread, int i);
+int		ft_mode1(t_f *lst, t_th *tread, int i);
+int		ft_mode2(t_f *lst, t_th *tread, int i);
+int		ft_mode3(t_f *lst, t_th *tread, int i);
+int		ft_mode4(t_f *lst, t_th *tread, int i);
+int		ft_mode5(t_f *lst, t_th *tread, int i);
+int		ft_mode6(t_f *lst, t_th *tread, int i);
+int		ft_mode7(t_f *lst, t_th *tread, int i);
+int		ft_mode8(t_f *lst, t_th *tread, int i);
 
 #endif

@@ -1,90 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/06 17:15:39 by fmerding          #+#    #+#             */
+/*   Updated: 2019/02/06 17:15:51 by fmerding         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fractol.h"
-
-int		key_hook(int key, void *param)
-{
-	t_f *lst;
-
-	lst = (t_f *)param;
-	if (key == 53)
-		exit(0);
-	if (key == 18)
-		lst->colormode = 1;
-	if (key == 19)
-		lst->colormode = 2;
-	if (key == 20)
-		lst->colormode = 3;
-	if (key == 21)
-		lst->colormode = 4;
-	if (key == 22)
-		lst->colormode = 5;
-	if (key == 23)
-		lst->colormode = 6;
-	if (key == 26)
-		lst->colormode = 7;
-	if (key == 67)
-	{
-		if (lst->moove == 1)
-			lst->moove = 0;
-		else
-			lst->moove = 1;
-	}
-	if (key == 69)
-	{
-		if (lst->iteration >= 10)
-			lst->iteration += 10;
-		else if (lst->iteration < 10)
-			lst->iteration++;
-	}
-	if (key == 78)
-	{
-		if (lst->iteration > 10)
-			lst->iteration -= 10;
-		else if (lst->iteration > 1)
-			lst->iteration--;
-	}
-	if (key == 123)
-	{
-		lst->x1 -= 30 / lst->zoom_x;
-		lst->x2 -= 30 / lst->zoom_x;
-	}
-	if (key == 124)
-	{
-		lst->x1 += 30 / lst->zoom_x;
-		lst->x2 += 30 / lst->zoom_x;
-	}
-	if (key == 125)
-	{
-		lst->y1 += 30 / lst->zoom_y;
-		lst->y2 += 30 / lst->zoom_y;
-	}
-	if (key == 126)
-	{
-		lst->y1 -= 30 / lst->zoom_y;
-		lst->y2 -= 30 / lst->zoom_y;
-	}
-	if (key == 51)
-		ft_init_list(lst);
-	if (key == 47)
-	{
-		lst->mode++;
-		if (lst->mode == 9)
-			lst->mode = 1;
-		ft_init_list(lst);
-	}
-	if (key == 43)
-	{
-		lst->mode--;
-		if (lst->mode == 0)
-			lst->mode = 8;
-		ft_init_list(lst);
-	}
-
-	mlx_destroy_image(lst->mlx_ptr, lst->img);
-	ft_init_image(lst);
-	ft_trace(lst);
-	return (0);
-}
 
 int		mouse_hook(int key, int x, int y, void *param)
 {
@@ -139,10 +65,14 @@ void	ft_zoom(int x, int y, t_f *lst, int z)
 	{
 		lst->zoom_x *= 1.1;
 		lst->zoom_y *= 1.1;
-		lst->x1 = lst->x1 * lst->zoom_x ;
-		lst->x2 = lst->x2 * lst->zoom_x;
-		lst->y1 = lst->y1 * lst->zoom_y;
-		lst->y2 = lst->y2 * lst->zoom_y;
+		lst->x1 = (lst->x1 * lst->zoom_x+ x - 0.5 * WIN_SIZEX) /
+		lst->zoom_x;
+		lst->x2 = (lst->x2 * lst->zoom_x+ x - 0.5 * WIN_SIZEX) /
+		lst->zoom_x;
+		lst->y1 = (lst->y1 * lst->zoom_y+ x - 0.5 * WIN_SIZEX) /
+		lst->zoom_x;
+		lst->y2 = (lst->y2 * lst->zoom_y+ x - 0.5 * WIN_SIZEX) /
+		lst->zoom_x;
 	}
 	if (z == 0)
 	{

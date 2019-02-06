@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pixels.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/06 17:46:51 by fmerding          #+#    #+#             */
+/*   Updated: 2019/02/06 18:30:13 by fmerding         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fractol.h"
 
@@ -6,103 +17,84 @@ void	ft_menu(t_f *lst)
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 0, 0xFFFFFF,
 		"COMMANDS");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 20, 0xFFFFFF,
-		"Arrows | Movements");
+		" Arrows | Movements");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 35, 0xFFFFFF,
-		"  + -  | Iterations");
+		"  +/-   | Iterations");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 50, 0xFFFFFF,
-		"Scroll | Zoom");
+		" Scroll | Zoom");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 65, 0xFFFFFF,
-		" 1 2 3 | Colors");
+		"  1-7   | Colors");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 80, 0xFFFFFF,
-		"Delete | Reset");
+		"   8    | Random Colors");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 95, 0xFFFFFF,
-		"Escape | Close");
+		" Delete | Reset");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 110, 0xFFFFFF,
-		"   *   | block/unblock");
+		" Escape | Close");
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 125, 0xFFFFFF,
+		"   *    | block/unblock");
 }
-
 
 void	ft_lightup_pixel(t_f *lst, int x, int y, int i)
 {
 	int new_x;
-	int x1 = 0;
-	int x2 = 0;
-	int x3 = 0;
+	int x1;
+	int x2;
+	int x3;
+
 	if (x < WIN_SIZEX && y < WIN_SIZEY && x > 0 && y > 0)
 	{
 		new_x = x * 4 + ((WIN_SIZEX * 4) * y);
-		if (lst->colormode == 1)
-		{
-			x1 = sin(0.4*i - 11)*127+128;
-			x2 = sin(0.1*i + 33)*127+128;
-			x3 = sin(0.22*i + 12)*127+128;
-		}
-		if (lst->colormode == 2)
-		{
-			x1 = sin(0.1*i + 12)*127+128;
-			x2 = sin(0.01*i + 99)*127+128;
-			x3 = sin(0.44*i + 4)*127+128;
-		}
-		if (lst->colormode == 3)
-		{
-			x1 = sin(0.1*i + 0)*127+128;
-			x2 = sin(0.9*i + 48)*127+128;
-			x3 = sin(0.7*i - 22)*127+128;
-		}
-		if (lst->colormode == 4)
-		{
-			x1 = sin(0.3*i + 0)*127+128;
-			x2 = sin(0.3*i + 2)*127+128;
-			x3 = sin(0.3*i + 4)*127+128;
-		}
-		if (lst->colormode == 5)
-		{
-			x1 = sin(0.3*i + 12)*127+128;
-			x2 = sin(0.2*i + 5)*127+128;
-			x3 = sin(0.3*i + 10)*127+128;
-		}
-		if (lst->colormode == 6)
-		{
-			x1 = sin(0.5*i + 0)*127+128;
-			x2 = sin(0.01*i + 51)*127+128;
-			x3 = sin(0.8*i -44)*127+128;
-		}
-		if (lst->colormode == 7)
-		{
-			x1 = sin(0.001*i + 1)*127+128;
-			x2 = sin(0.3*i + 9)*127+128;
-			x3 = sin(0.044*i + 8)*127+128;
-		}
+		x1 = ft_red(lst, i);
+		x2 = ft_green(lst, i);
+		x3 = ft_blue(lst, i);
 		lst->s_img[new_x] = x1;
 		lst->s_img[new_x + 1] = x2;
 		lst->s_img[new_x + 2] = x3;
 		lst->s_img[new_x + 3] = 0;
 	}
-
 }
 
+void	ft_init_image(t_f *lst)
+{
+	int sizex;
+	int sizey;
+	int	bpp;
+	int endian;
 
+	sizex = WIN_SIZEX;
+	sizey = WIN_SIZEY;
+	bpp = 4;
+	endian = 0;
+	if (lst->retarded > 0)
+	{
+		lst->retarded++;
+		if (lst->retarded % 10 == 0)
+			lst->colormode = ft_random7();
+	}
+	lst->img = mlx_new_image(lst->mlx_ptr, sizex, sizey);
+	lst->s_img = (unsigned char*)(mlx_get_data_addr(lst->img, &(bpp)
+	, &(sizex), &(endian)));
+}
 
-
-float		ft_random7(void)
+float	ft_random7(void)
 {
 	int random;
 
 	random = rand() * 1;
 	if (random < 268435455)
-		return (0.1);
+		return (1);
 	else if (random < 268435455 * 2)
-		return (0.2);
+		return (2);
 	else if (random < 268435455 * 3)
-		return (0.3);
+		return (3);
 	else if (random < 268435455 * 4)
-		return (0.4);
+		return (4);
 	else if (random < 268435455 * 5)
-		return (0.5);
+		return (5);
 	else if (random < 268435455 * 6)
-		return (0.6);
+		return (6);
 	else if (random < 268435455 * 7)
-		return (0.7);
+		return (7);
 	else
-		return (0.8);
+		return (4);
 }
