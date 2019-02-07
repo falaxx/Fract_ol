@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 17:46:51 by fmerding          #+#    #+#             */
-/*   Updated: 2019/02/07 19:16:29 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/02/07 19:23:00 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,21 @@ void	ft_menu(t_f *lst)
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 12, 0xFFFFFF,
 		" Arrows | Movements");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 24, 0xFFFFFF,
-
 		" Delete | Reset");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 36, 0xFFFFFF,
 		" Scroll | Zoom");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 48, 0xFFFFFF,
 		" Escape | Close");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 60, 0xFFFFFF,
-		"     8  | Random Colors");
+		"    8   | Random Colors");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 72, 0xFFFFFF,
-		"    +/- | Iterations");
+		"   +/-  | Iterations");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 84, 0xFFFFFF,
-		"    1-7 | Colors");
+		"   1-7  | Colors");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 96, 0xFFFFFF,
-		"     *  | Block/Unblock");
+		"    *   | Block/Unblock");
 	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 108, 0xFFFFFF,
-		"    ,/. | Previous/Next");
+		"   ,/.  | Previous/Next");
 }
 
 void	ft_lightup_pixel(t_f *lst, int x, int y, int i)
