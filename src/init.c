@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:56:10 by fmerding          #+#    #+#             */
-/*   Updated: 2019/02/07 19:02:16 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/02/07 19:29:03 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_init_list4(t_f *lst)
 		lst->x1 = -1;
 		lst->x2 = 1;
 		lst->y1 = -1.8;
-		lst->y2 = 1.8;
+		lst->y2 = 1.81;
 		lst->z_i = -1.26;
 		lst->z_r = 0;
 		lst->colormode = 4;
