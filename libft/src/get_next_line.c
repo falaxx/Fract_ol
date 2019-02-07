@@ -6,12 +6,11 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:30:35 by fmerding          #+#    #+#             */
-/*   Updated: 2019/02/07 13:55:06 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/02/07 18:54:34 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "get_next_line.h"
 
 t_gnlist	*ft_gnlistnew(int fd)
 {

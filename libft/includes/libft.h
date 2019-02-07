@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 14:38:20 by fmerding          #+#    #+#             */
-/*   Updated: 2018/12/06 18:18:56 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/02/07 18:54:58 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 # include <unistd.h>
 # include <limits.h>
 # include <fcntl.h>
+# define BUFF_SIZE 1
+
+typedef struct		s_gnlist
+{
+	char			*save;
+	int				fd;
+	struct s_gnlist	*next;
+}					t_gnlist;
 
 typedef struct		s_list
 {
@@ -98,4 +106,5 @@ int					ft_sqrt(int nb);
 int					ft_is_prime(int nb);
 char				*ft_strcapitalize(char *str);
 void				ft_display_file(char *str);
+int					get_next_line(const int fd, char **line);
 #endif

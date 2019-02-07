@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 17:04:37 by fmerding          #+#    #+#             */
-/*   Updated: 2019/02/06 17:46:42 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/02/07 19:02:32 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		main(int ac, char **av)
 	if ((ac != 2 || ft_atoi(av[1]) < 1 || ft_atoi(av[1])
 	> 8) || ft_strlen(av[1]) != 1)
 	{
-		ft_putstr("usage : ./fractol #numberbetween1and8");
+		ft_putstr("usage : ./fractol #number_between_1_and_8\n");
 		return (0);
 	}
 	if (!(lst = (t_f *)malloc(sizeof(t_f))))
@@ -28,6 +28,7 @@ int		main(int ac, char **av)
 	lst->win_ptr = mlx_new_window(lst->mlx_ptr, WIN_SIZEX, WIN_SIZEY,
 		"Fractol");
 	lst->mode = ft_atoi(av[1]);
+	lst->retarded = 0;
 	ft_init_list(lst);
 	ft_init_image(lst);
 	ft_trace(lst);

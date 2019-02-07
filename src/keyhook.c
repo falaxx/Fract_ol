@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 17:09:40 by fmerding          #+#    #+#             */
-/*   Updated: 2019/02/06 17:33:57 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/02/07 18:59:36 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,11 @@ void	key_hook4(t_f *lst, int key)
 		lst->colormode = 7;
 	if (key == 28)
 	{
-		if (lst->retarded != 1)
+		if (lst->retarded == 0)
+		{
 			lst->retarded = 1;
+			lst->colormode = ft_random7();
+		}
 		else
 			lst->retarded = 0;
 	}

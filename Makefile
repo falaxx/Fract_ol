@@ -20,7 +20,7 @@ OBJ_PATH = obj
 
 HEADER_PATH = includes/
 
-HEADER_NAME = fdf.h
+HEADER_NAME = fractol.h
 
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
