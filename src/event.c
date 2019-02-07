@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/06 17:15:39 by fmerding          #+#    #+#             */
-/*   Updated: 2019/02/06 17:15:51 by fmerding         ###   ########.fr       */
+/*   Created: 2019/02/07 17:02:19 by fmerding          #+#    #+#             */
+/*   Updated: 2019/02/07 18:20:08 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,34 +58,16 @@ int		mouse_move(int x, int y, void *param)
 
 void	ft_zoom(int x, int y, t_f *lst, int z)
 {
-	// float xdiff = lst->x2-lst->x1;
-	// float ydiff = lst->y2-lst->y1;
-
+	x = y;
 	if (z == 1)
 	{
 		lst->zoom_x *= 1.1;
 		lst->zoom_y *= 1.1;
-		lst->x1 = (lst->x1 * lst->zoom_x+ x - 0.5 * WIN_SIZEX) /
-		lst->zoom_x;
-		lst->x2 = (lst->x2 * lst->zoom_x+ x - 0.5 * WIN_SIZEX) /
-		lst->zoom_x;
-		lst->y1 = (lst->y1 * lst->zoom_y+ x - 0.5 * WIN_SIZEX) /
-		lst->zoom_x;
-		lst->y2 = (lst->y2 * lst->zoom_y+ x - 0.5 * WIN_SIZEX) /
-		lst->zoom_x;
 	}
 	if (z == 0)
 	{
-		lst->zoom_x *= 0.9;
-		lst->zoom_y *= 0.9;
-		lst->x1 = (lst->x1 * lst->zoom_x + x - 0.5 * WIN_SIZEX) /
-		lst->zoom_x;
-		lst->x2 = (lst->x2 * lst->zoom_x + x + 0.5 * WIN_SIZEX) /
-		lst->zoom_x;
-		lst->y1 = (lst->y1 * lst->zoom_y + y - 0.5 * WIN_SIZEY) /
-		lst->zoom_y;
-		lst->y2 = (lst->y2 * lst->zoom_y + y + 0.5 * WIN_SIZEY) /
-		lst->zoom_y;
+		lst->zoom_x /= 1.1;
+		lst->zoom_y /= 1.1;
 	}
 }
 

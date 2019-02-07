@@ -3,75 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgehin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 19:09:02 by jgehin            #+#    #+#             */
-/*   Updated: 2018/11/16 19:44:56 by jgehin           ###   ########.fr       */
+/*   Created: 2018/11/16 16:58:48 by fmerding          #+#    #+#             */
+/*   Updated: 2018/11/16 19:42:49 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
+#include "stdlib.h"
 
-static int	nbmot(char const *str, char c)
+static char	ft_isc(int c)
+{
+	static char delimiter;
+
+	if (-128 <= c && c <= 127)
+	{
+		delimiter = c;
+	}
+	return (delimiter);
+}
+
+static int	ft_countword(char *str)
 {
 	int i;
-	int nb;
+	int j;
 
 	i = 0;
-	nb = 0;
+	j = 0;
+	while (str[i] == ft_isc(1000))
+		i++;
 	while (str[i] != '\0')
 	{
-		if (str[i] != c && (str[i + 1] == c || str[i + 1] == '\0'))
-			nb++;
+		if ((str[i] != ft_isc(1000)) && (str[i + 1] == ft_isc(1000) ||
+		str[i + 1] == '\0'))
+			j++;
 		i++;
 	}
-	return (nb);
+	return (j);
 }
 
-static int	lgmot(const char *str, char c)
+static char	*ft_strcpy(char *dest, char *src, int b, int len)
 {
-	int i;
+	int count;
+	int sum;
+
+	sum = b + len;
+	count = 0;
+	while (b < sum)
+	{
+		dest[count] = src[b];
+		count++;
+		b++;
+	}
+	dest[count] = '\0';
+	return (dest);
+}
+
+static void	ft_blen(int *i, int *b, char *str, int *len)
+{
+	*len = 0;
+	while (str[*i] == ft_isc(1000))
+		(*i)++;
+	*b = *i;
+	while (str[*i] != ft_isc(1000) && str[*i] != '\0')
+	{
+		(*i)++;
+		(*len)++;
+	}
+}
+
+char		**ft_strsplit(const char *str, char c)
+{
+	int		i;
+	int		len;
+	char	**str2;
+	int		b;
+	int		l;
 
 	i = 0;
-	while (*str == c)
-		str++;
-	while (str[i] != c && str[i] != '\0')
-		i++;
-	return (i);
-}
-
-const char	*ftcopy(const char *str, char *tub, char c)
-{
-	int i;
-
-	i = -1;
-	while (*str == c)
-		str++;
-	while (*str != c && *str != '\0')
-		tub[++i] = *(str++);
-	tub[++i] = '\0';
-	return (str);
-}
-
-char		**ft_strsplit(char const *str, char c)
-{
-	int		u;
-	char	**tab;
-	int		nb;
-
-	u = -1;
-	if (!str || !c)
-		return (0);
-	nb = nbmot(str, c);
-	if (!(tab = (char**)malloc(sizeof(*tab) * (nb + 1))))
+	l = 0;
+	ft_isc((int)c);
+	if (!str || !(str2 = malloc(sizeof(char*) *
+	(ft_countword((char*)str) + 1))))
 		return (NULL);
-	while (++u < nb)
+	while (str[i] != '\0')
 	{
-		if (!(tab[u] = (char*)malloc(sizeof(**tab) * lgmot(str, c) + 1)))
-			return (0);
-		str = ftcopy(str, tab[u], c);
+		ft_blen(&i, &b, (char*)str, &len);
+		if (len > 0)
+		{
+			if (!(str2[l] = malloc(sizeof(char) * (len + 1))))
+				return (0);
+			str2[l] = ft_strcpy(str2[l], (char*)str, b, len);
+			l++;
+		}
 	}
-	tab[u] = 0;
-	return (tab);
+	str2[l] = 0;
+	return (str2);
 }

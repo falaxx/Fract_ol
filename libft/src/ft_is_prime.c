@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgehin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/19 14:07:40 by jgehin            #+#    #+#             */
-/*   Updated: 2018/11/19 14:18:00 by jgehin           ###   ########.fr       */
+/*   Created: 2018/09/04 19:11:34 by fmerding          #+#    #+#             */
+/*   Updated: 2018/11/20 15:16:11 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isspace(int c)
+int		ft_is_prime(int nb)
 {
-	if (c == 32 || (c >= 9 && c <= 13))
+	int i;
+
+	i = 3;
+	if (nb <= 1)
+		return (0);
+	if (nb == 2)
 		return (1);
-	return (0);
+	if ((nb % 2) == 0)
+		return (0);
+	while (i < (nb / 2))
+	{
+		if ((nb % i) != 0)
+			i = i + 2;
+		else
+			return (0);
+	}
+	return (1);
 }

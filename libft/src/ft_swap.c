@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgehin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 12:47:07 by jgehin            #+#    #+#             */
-/*   Updated: 2018/11/19 13:36:37 by jgehin           ###   ########.fr       */
+/*   Created: 2018/09/02 22:33:21 by fmerding          #+#    #+#             */
+/*   Updated: 2018/11/20 15:16:22 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_swap(int *a, int *b)
 {
-	int tmp;
+	int tmpa;
+	int tmpb;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	tmpa = *a;
+	tmpb = *b;
+	*a = tmpb;
+	*b = tmpa;
 }

@@ -3,35 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgehin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 13:49:58 by jgehin            #+#    #+#             */
-/*   Updated: 2018/11/14 16:04:30 by jgehin           ###   ########.fr       */
+/*   Created: 2018/11/08 14:11:01 by fmerding          #+#    #+#             */
+/*   Updated: 2018/11/19 18:51:00 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
+#include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char		*t1;
-	const unsigned char	*t2;
-	int					i;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	t1 = dest;
-	t2 = src;
-	i = 0;
-	if (t1 > t2)
+	d = dest;
+	s = src;
+	if (!n)
+		return (dest);
+	if (s < d)
 	{
-		while (i <= (int)--n)
-			t1[n] = t2[n];
+		s = s + n;
+		d = d + n;
+		while (n > 0)
+		{
+			*--d = *--s;
+			n--;
+		}
 	}
-	if (t1 < t2)
-	{
-		i--;
-		while (++i < (int)n)
-			t1[i] = t2[i];
-	}
+	ft_memcpy(d, src, n);
 	return (dest);
 }

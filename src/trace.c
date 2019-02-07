@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 18:35:41 by fmerding          #+#    #+#             */
-/*   Updated: 2019/02/06 18:35:44 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/02/07 18:19:18 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_trace(t_f *lst)
 		exit(0);
 	if (pthread_join(thread[3], NULL) == -1)
 		exit(0);
+	ft_trace2(lst);
 	mlx_put_image_to_window(lst->mlx_ptr, lst->win_ptr, lst->img, 0, 0);
 	ft_menu(lst);
 }
@@ -47,7 +48,7 @@ void	*ft_thread_1(void *arg)
 	lst = (t_f *)arg;
 	tread->x = 0;
 	tread->y = 0;
-	while (tread->x <= WIN_SIZEX / 4)
+	while (tread->x <= WIN_SIZEX / 8)
 	{
 		while (tread->y < WIN_SIZEY)
 		{
@@ -74,9 +75,9 @@ void	*ft_thread_2(void *arg)
 	if (!(tread = (t_th *)malloc(sizeof(t_th))))
 		return (0);
 	lst = (t_f *)arg;
-	tread->x = WIN_SIZEX / 4;
+	tread->x = WIN_SIZEX / 8;
 	tread->y = 0;
-	while (tread->x <= WIN_SIZEX / 2)
+	while (tread->x <= WIN_SIZEX / 4)
 	{
 		while (tread->y < WIN_SIZEY)
 		{
@@ -103,9 +104,9 @@ void	*ft_thread_3(void *arg)
 	if (!(tread = (t_th *)malloc(sizeof(t_th))))
 		return (0);
 	lst = (t_f *)arg;
-	tread->x = WIN_SIZEX / 2;
+	tread->x = WIN_SIZEX / 4;
 	tread->y = 0;
-	while (tread->x <= WIN_SIZEX / 4 * 3)
+	while (tread->x <= WIN_SIZEX / 8 * 3)
 	{
 		while (tread->y < WIN_SIZEY)
 		{
@@ -132,9 +133,9 @@ void	*ft_thread_4(void *arg)
 	if (!(tread = (t_th *)malloc(sizeof(t_th))))
 		return (0);
 	lst = (t_f *)arg;
-	tread->x = WIN_SIZEX / 4 * 3;
+	tread->x = WIN_SIZEX / 8 * 3;
 	tread->y = 0;
-	while (tread->x <= WIN_SIZEX)
+	while (tread->x <= WIN_SIZEX / 2)
 	{
 		while (tread->y < WIN_SIZEY)
 		{

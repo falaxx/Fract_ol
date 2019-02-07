@@ -3,41 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgehin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 09:44:25 by jgehin            #+#    #+#             */
-/*   Updated: 2018/11/16 19:42:20 by jgehin           ###   ########.fr       */
+/*   Created: 2018/11/14 13:33:13 by fmerding          #+#    #+#             */
+/*   Updated: 2018/11/16 19:38:04 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
-#include <string.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*tab;
+	char	*dest;
 	int		len;
 	int		len2;
 	int		i;
-	int		u;
+	int		j;
 
-	u = 0;
 	i = 0;
+	j = 0;
+	len = 0;
+	len2 = 0;
 	if (!s1 || !s2)
-		return (0);
-	len = (s1[i] != '\0') ? ft_strlen(s1) : 0;
+		return (NULL);
+	if (s1[i] != '\0')
+		len = ft_strlen(s1);
 	if (s2[i] != '\0')
 		len2 = ft_strlen(s2);
-	else
-		len2 = 0;
-	if (!(tab = (char*)malloc(sizeof(*tab) * (len + len2 + 1))))
+	if (!(dest = (char*)malloc(sizeof(char) * (len2 + 1 + len))))
 		return (NULL);
 	while (len-- > 0)
-		tab[i++] = s1[u++];
-	u = 0;
+		dest[i++] = s1[j++];
+	j = 0;
 	while (len2-- > 0)
-		tab[i++] = s2[u++];
-	tab[i++] = '\0';
-	return (tab);
+		dest[i++] = s2[j++];
+	dest[i++] = '\0';
+	return (dest);
 }

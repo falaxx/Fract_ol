@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgehin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 11:21:02 by jgehin            #+#    #+#             */
-/*   Updated: 2018/11/16 19:46:34 by jgehin           ###   ########.fr       */
+/*   Created: 2018/11/14 11:16:36 by fmerding          #+#    #+#             */
+/*   Updated: 2018/11/16 19:34:31 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strtrim(char const *s)
 {
-	char	*tab;
-	int		i;
+	char	*dest;
+	size_t	i;
+	size_t	j;
 
 	if (!s)
-		return (0);
+		return (NULL);
+	j = 0;
 	while (*(s) == ' ' || *(s) == '\n' || *(s) == '\t')
-		(s++);
+		s++;
 	i = ft_strlen(s);
 	if (i > 0)
 	{
@@ -30,9 +30,13 @@ char	*ft_strtrim(char const *s)
 			i--;
 		i++;
 	}
-	if (!(tab = (char*)malloc(sizeof(*tab) * i + 1)))
+	if (!(dest = (char*)malloc(sizeof(*dest) * i + 1)))
 		return (NULL);
-	ft_strncpy(tab, (char*)s, i);
-	tab[i] = '\0';
-	return (tab);
+	while (j < i)
+	{
+		dest[j] = s[j];
+		j++;
+	}
+	dest[j] = '\0';
+	return (dest);
 }

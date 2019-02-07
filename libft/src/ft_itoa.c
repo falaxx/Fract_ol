@@ -3,50 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgehin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/15 13:55:58 by jgehin            #+#    #+#             */
-/*   Updated: 2018/11/16 14:56:59 by jgehin           ###   ########.fr       */
+/*   Created: 2018/11/16 12:37:18 by fmerding          #+#    #+#             */
+/*   Updated: 2018/11/21 12:11:02 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
+#include "libft.h"
 
-static void		ftcopy(char *s, int len, int n)
+static unsigned int	ft_findi(unsigned int m)
 {
-	int i;
+	unsigned int i;
 
-	while (--len >= 0)
+	i = 1;
+	while (m >= 10)
 	{
-		i = (n % 10) < 0 ? -(n % 10) : (n % 10);
-		s[len] = i + 48;
-		n /= 10;
+		m = m / 10;
+		i++;
 	}
+	return (i);
 }
 
-char			*ft_itoa(int n)
+char				*ft_itoa(int n)
 {
-	int		div;
-	int		len;
-	int		i;
-	char	*s;
+	int				neg;
+	int				i;
+	unsigned int	m;
+	char			*str;
 
-	i = 0;
-	len = 0;
-	div = n;
-	while (div != 0)
-	{
-		div /= 10;
-		len++;
-	}
-	len = n < 0 ? len + 1 : len;
-	len = n == 0 ? 1 : len;
-	if (!(s = (char*)malloc(sizeof(*s) * (len + 1))))
-		return (NULL);
-	s[len] = '\0';
-	ftcopy(s, len, n);
+	neg = 0;
 	if (n < 0)
-		s[0] = '-';
-	return (s);
+		neg = 1;
+	m = (n >= 0) ? n : -n;
+	i = ft_findi(m) + neg;
+	if (!(str = (char *)malloc(sizeof(char) * i + 1)))
+		return (NULL);
+	str[i] = '\0';
+	while (--i >= 0)
+	{
+		str[i] = m % 10 + 48;
+		m = m / 10;
+	}
+	if (neg == 1)
+		str[0] = '-';
+	return (str);
 }

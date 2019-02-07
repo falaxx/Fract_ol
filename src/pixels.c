@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 17:46:51 by fmerding          #+#    #+#             */
-/*   Updated: 2019/02/06 18:30:13 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/02/07 18:24:41 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void	ft_menu(t_f *lst)
 {
-	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 0, 0xFFFFFF,
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 0, 0xFFFFFF,
 		"COMMANDS");
-	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 20, 0xFFFFFF,
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 20, 0xFFFFFF,
 		" Arrows | Movements");
-	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 35, 0xFFFFFF,
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 35, 0xFFFFFF,
 		"  +/-   | Iterations");
-	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 50, 0xFFFFFF,
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 50, 0xFFFFFF,
 		" Scroll | Zoom");
-	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 65, 0xFFFFFF,
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 65, 0xFFFFFF,
 		"  1-7   | Colors");
-	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 80, 0xFFFFFF,
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 80, 0xFFFFFF,
 		"   8    | Random Colors");
-	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 95, 0xFFFFFF,
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 95, 0xFFFFFF,
 		" Delete | Reset");
-	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 110, 0xFFFFFF,
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 110, 0xFFFFFF,
 		" Escape | Close");
-	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 5, 125, 0xFFFFFF,
+	mlx_string_put(lst->mlx_ptr, lst->win_ptr, 755, 125, 0xFFFFFF,
 		"   *    | block/unblock");
 }
 
@@ -41,7 +41,7 @@ void	ft_lightup_pixel(t_f *lst, int x, int y, int i)
 	int x2;
 	int x3;
 
-	if (x < WIN_SIZEX && y < WIN_SIZEY && x > 0 && y > 0)
+	if (x <= WIN_SIZEX && y <= WIN_SIZEY && x >= 0 && y >= 0)
 	{
 		new_x = x * 4 + ((WIN_SIZEX * 4) * y);
 		x1 = ft_red(lst, i);

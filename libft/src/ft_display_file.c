@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_lowercase.c                              :+:      :+:    :+:   */
+/*   ft_display_file.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgehin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/19 14:19:59 by jgehin            #+#    #+#             */
-/*   Updated: 2018/11/19 14:20:14 by jgehin           ###   ########.fr       */
+/*   Created: 2018/11/20 15:24:46 by fmerding          #+#    #+#             */
+/*   Updated: 2018/11/21 12:11:38 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_str_is_lowercase(char *str)
-{
-	int ct;
+#include "libft.h"
 
-	ct = 0;
-	while (str[ct] != '\0')
+void	ft_display_file(char *str)
+{
+	int		fd;
+	int		i;
+	char	c[1];
+
+	i = 1;
+	fd = open(str, O_RDONLY);
+	while (i == 1)
 	{
-		if (str[0] == '\0')
-			return (1);
-		if (str[ct] < 97 || str[ct] > 122)
-			return (0);
-		ct++;
+		i = read(fd, c, 1);
+		if (i == 1)
+			write(1, &c, 1);
 	}
-	return (1);
+	close(fd);
 }

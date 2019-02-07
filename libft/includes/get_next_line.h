@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgehin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 11:29:59 by jgehin            #+#    #+#             */
-/*   Updated: 2018/12/05 10:54:41 by jgehin           ###   ########.fr       */
+/*   Created: 2018/12/06 17:59:26 by fmerding          #+#    #+#             */
+/*   Updated: 2018/12/10 15:43:38 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 10
+# define BUFF_SIZE 1
 
-typedef struct		s_glist
-{
-	char			*tmp;
-	int				fd;
-	struct s_glist	*next;
-}					t_glist;
 int					get_next_line(const int fd, char **line);
+
+typedef struct		s_gnlist
+{
+	char			*save;
+	int				fd;
+	struct s_gnlist	*next;
+}					t_gnlist;
 
 #endif
