@@ -4,8 +4,8 @@ Creating beautiful fractals
 ## Description
 This project's goal is to creat a small fractal exploration program, including the Julia and Mandelbrot.
 
-![](allfractals.gif)
 ![](julia.gif)
+![](allfractals.gif)
 
 Features:
 
